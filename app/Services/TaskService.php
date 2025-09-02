@@ -13,9 +13,9 @@ class TaskService
     ) {
     }
 
-    public function getAll(array $params = []): array
+    public function getPaginated(array $params = []): array
     {
-        $paginated = $this->taskRepository->getAll($params);
+        $paginated = $this->taskRepository->getPaginated($params);
 
         return [
             'pages' => $paginated->lastPage(),

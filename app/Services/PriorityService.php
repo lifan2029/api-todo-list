@@ -12,8 +12,8 @@ class PriorityService
     ) {
     }
 
-    public function getAll(array $params = []): Collection
+    public function getAll(): Collection
     {
-        return $this->priorityRepository->getAll($params);
+        return $this->priorityRepository->getAll();
     }
 }

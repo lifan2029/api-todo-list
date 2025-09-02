@@ -16,10 +16,10 @@ class TaskController
     ) {
     }
 
-    public function getAll(IndexRequest $request): JsonResponse
+    public function getPaginated(IndexRequest $request): JsonResponse
     {
         return response()->json([
-            'tasks' => $this->taskService->getAll($request->validated())
+            'tasks' => $this->taskService->getPaginated($request->validated())
         ]);
     }
 
