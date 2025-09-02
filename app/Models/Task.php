@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * @property int $user_id
+ * @property string $title
+ * @property ?string $description
+ * @property ?Carbon $due_date
+ * @property int $priority_id
+ * @property ?int $parent_id
+ * @property bool $is_completed
+ */
+class Task extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'due_date',
+        'priority_id',
+        'parent_id',
+        'is_completed'
+    ];
+
+    protected $casts = [
+        'due_date' => 'datetime',
+        'is_completed' => 'boolean',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class, 'priority_id');
+    }
+}

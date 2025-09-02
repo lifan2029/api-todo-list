@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Task;
+use App\Repositories\TaskRepository;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
+class TaskService
+{
+    public function __construct(
+        private readonly TaskRepository $taskRepository
+    ) {
+    }
+
+    public function getAll(array $params = []): array
+    {
+        $paginated = $this->taskRepository->getAll($params);
+
+        return [
+            'pages' => $paginated->lastPage(),
+            'total' => $paginated->total(),
+            'current_page' => $paginated->currentPage(),
+            'properties' => $paginated->items(),
+        ];
+    }
+
+    public function store(array $data): Task
+    {
+        return $this->taskRepository->store($data);
+    }
+
+    public function update(Task $task, array $data): Task
+    {
+        if ($task->user_id !== auth()->id()) {
+            throw new BadRequestHttpException(__('messages.task_not_your'));
+        }
+
+        $task->update($data);
+
+        return $task;
+    }
+
+    public function delete(Task $task): void
+    {
+        if ($task->user_id !== auth()->id()) {
+            throw new BadRequestHttpException(__('messages.task_not_your'));
+        }
+
+        $task->delete();
+    }
+}
