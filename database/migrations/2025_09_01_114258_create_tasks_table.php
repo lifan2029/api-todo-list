@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('priority_id')->nullable()->default(PriorityLevel::LOW->value);
             $table->bigInteger('parent_id')->nullable();
             $table->boolean('is_completed')->default(false);
+            $table->timestamp('completed_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

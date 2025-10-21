@@ -44,4 +44,9 @@ class Task extends Model
     {
         return $this->belongsTo(Priority::class, 'priority_id');
     }
+
+    public function subtasks()
+    {
+        return $this->hasMany(Task::class, 'parent_id');
+    }
 }

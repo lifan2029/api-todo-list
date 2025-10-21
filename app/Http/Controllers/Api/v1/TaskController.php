@@ -37,6 +37,16 @@ class TaskController
         ]);
     }
 
+    public function complete(Task $task): JsonResponse
+    {
+        return response()->json([
+            'task' => $this->taskService->update($task, [
+                'is_completed' => true,
+                'completed_at' => now(),
+            ])
+        ]);
+    }
+
     public function delete(Task $task): JsonResponse
     {
         $this->taskService->delete($task);

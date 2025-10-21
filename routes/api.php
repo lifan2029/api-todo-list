@@ -18,6 +18,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
             Route::get('/', 'getAll');
             Route::post('/store', 'store');
             Route::put('/update/{task}', 'update');
+            Route::put('/complete/{task}', 'complete');
             Route::delete('/delete/{task}', 'delete');
         });
     });
