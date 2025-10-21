@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * @property int $id
  * @property int $user_id
  * @property string $title
  * @property ?string $description
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $priority_id
  * @property ?int $parent_id
  * @property bool $is_completed
+ * @property ?Carbon $completed_at
  */
 class Task extends Model
 {
@@ -27,12 +29,14 @@ class Task extends Model
         'due_date',
         'priority_id',
         'parent_id',
-        'is_completed'
+        'is_completed',
+        'completed_at',
     ];
 
     protected $casts = [
         'due_date' => 'datetime',
         'is_completed' => 'boolean',
+        'completed_at' => 'datetime',
     ];
 
     public function user()
