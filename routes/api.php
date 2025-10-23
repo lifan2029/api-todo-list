@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\PriorityController;
+use App\Http\Controllers\Api\V1\ProjectController;
 use App\Http\Controllers\Api\V1\TaskController;
 
 Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
@@ -20,6 +21,15 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
             Route::put('/update/{task}', 'update');
             Route::put('/complete/{task}', 'complete');
             Route::delete('/delete/{task}', 'delete');
+        });
+    });
+
+    Route::controller(ProjectController::class)->prefix('project')->group(function () {
+        Route::middleware(['auth:api'])->group(function () {
+            Route::get('/', 'getPaginated');
+            Route::post('/store', 'store');
+            Route::put('/update/{project}', 'update');
+            Route::delete('/delete/{project}', 'delete');
         });
     });
 
