@@ -40,10 +40,7 @@ class TaskController
     public function complete(Task $task): JsonResponse
     {
         return response()->json([
-            'task' => $this->taskService->update($task, [
-                'is_completed' => true,
-                'completed_at' => now(),
-            ])
+            'task' => $this->taskService->setComplete($task)
         ]);
     }
 

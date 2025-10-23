@@ -41,6 +41,20 @@ class TaskService
         return $task;
     }
 
+    public function setComplete(Task $task): Task
+    {
+        if ($task->user_id !== auth()->id()) {
+            throw new BadRequestHttpException(__('messages.task_not_your'));
+        }
+
+        $task->update([
+            'is_completed' => true,
+            'completed_at' => now(),
+        ]);
+
+        return $task;
+    }
+
     public function delete(Task $task): void
     {
         if ($task->user_id !== auth()->id()) {
