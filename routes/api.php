@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\ColorController;
 use App\Http\Controllers\Api\V1\PriorityController;
 use App\Http\Controllers\Api\V1\ProjectController;
 use App\Http\Controllers\Api\V1\TaskController;
@@ -34,6 +35,10 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function () {
     });
 
     Route::controller(PriorityController::class)->prefix('priority')->group(function () {
+        Route::get('/', 'getAll')->middleware('auth:api');
+    });
+
+    Route::controller(ColorController::class)->prefix('color')->group(function () {
         Route::get('/', 'getAll')->middleware('auth:api');
     });
 });
