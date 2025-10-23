@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Resources\v1\Task\ShowResource;
+use App\Http\Resources\v1\Task\IndexResource;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -21,16 +23,18 @@ class TaskService
             'pages' => $paginated->lastPage(),
             'total' => $paginated->total(),
             'current_page' => $paginated->currentPage(),
-            'properties' => $paginated->items(),
+            'properties' => IndexResource::collection($paginated->items()),
         ];
     }
 
-    public function store(array $data): Task
+    public function store(array $data): ShowResource
     {
-        return $this->taskRepository->store($data);
+        return new ShowResource(
+            $this->taskRepository->store($data)
+        );
     }
 
-    public function update(Task $task, array $data): Task
+    public function update(Task $task, array $data): ShowResource
     {
         if ($task->user_id !== auth()->id()) {
             throw new BadRequestHttpException(__('messages.task_not_your'));
@@ -38,10 +42,10 @@ class TaskService
 
         $task->update($data);
 
-        return $task;
+        return new ShowResource($task);
     }
 
-    public function setComplete(Task $task): Task
+    public function setComplete(Task $task): ShowResource
     {
         if ($task->user_id !== auth()->id()) {
             throw new BadRequestHttpException(__('messages.task_not_your'));
@@ -52,7 +56,7 @@ class TaskService
             'completed_at' => now(),
         ]);
 
-        return $task;
+        return new ShowResource($task);
     }
 
     public function delete(Task $task): void

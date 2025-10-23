@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Resources\v1\Project\IndexResource;
+use App\Http\Resources\v1\Project\ShowResource;
 use App\Models\Project;
 use App\Repositories\ProjectRepository;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -21,16 +23,18 @@ class ProjectService
             'pages' => $paginated->lastPage(),
             'total' => $paginated->total(),
             'current_page' => $paginated->currentPage(),
-            'properties' => $paginated->items(),
+            'properties' => IndexResource::collection($paginated->items()),
         ];
     }
 
-    public function store(array $data): Project
+    public function store(array $data): ShowResource
     {
-        return $this->projectRepository->store($data);
+        return new ShowResource(
+            $this->projectRepository->store($data)
+        );
     }
 
-    public function update(Project $project, array $data): Project
+    public function update(Project $project, array $data): ShowResource
     {
         if ($project->user_id !== auth()->id()) {
             throw new BadRequestHttpException(__('messages.project_not_your'));
@@ -38,7 +42,7 @@ class ProjectService
 
         $project->update($data);
 
-        return $project;
+        return new ShowResource($project);
     }
 
     public function delete(Project $project): void

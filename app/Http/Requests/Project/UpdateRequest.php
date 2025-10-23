@@ -15,7 +15,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string', 'max:255'],
-            'parent_id' => ['sometimes', 'integer', 'exists:projects,id', 'nullable'],
+            'parent_id' => ['nullable', 'integer', 'exists:projects,id'],
+            'color_id' => ['nullable', 'integer', 'exists:colors,id'],
         ];
     }
 }

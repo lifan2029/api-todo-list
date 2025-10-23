@@ -23,7 +23,8 @@ class StoreRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer', 'exists:users,id'],
             'name' => ['required', 'string', 'max:255'],
-            'parent_id' => ['sometimes', 'integer', 'exists:projects,id', 'nullable'],
+            'parent_id' => ['nullable', 'integer', 'exists:projects,id'],
+            'color_id' => ['nullable', 'integer', 'exists:colors,id'],
         ];
     }
 }
