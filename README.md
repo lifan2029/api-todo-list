@@ -32,7 +32,7 @@ This project is a **pet project** and serves as a demonstration of REST API arch
 
 ```bash
 git clone https://github.com/lifan2029/api-todo-list.git
-cd todo-api
+cd api-todo-list
 ```
 
 ### 2. Copy environment file
