@@ -113,9 +113,9 @@ The online Postman collection is available here:
 ## 🔧 Useful Commands
 
 ```bash
-docker compose exec app php artisan migrate:fresh --seed   # Recreate DB with seed data
-docker compose exec app php artisan test                   # Run tests
-docker compose logs -f app                                 # View container logs
+docker compose exec laravel-php php artisan migrate:fresh --seed   # Recreate DB with seed data
+docker compose exec laravel-php php artisan test                   # Run tests
+docker compose logs -f laravel-php                                 # View container logs
 ```
 
 ---
