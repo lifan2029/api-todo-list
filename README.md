@@ -31,7 +31,7 @@ This project is a **pet project** and serves as a demonstration of REST API arch
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/username/todo-api.git
+git clone https://github.com/lifan2029/api-todo-list.git
 cd todo-api
 ```
 
