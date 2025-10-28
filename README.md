@@ -44,8 +44,6 @@ cp .env.example .env
 ### 3. Configure `.env` variables
 
 ```env
-APP_NAME="Todo List API"
-APP_URL=http://localhost
 DB_CONNECTION=mysql
 DB_HOST=laravel-db
 DB_PORT=3306
