@@ -118,11 +118,12 @@ docker compose logs -f laravel-php                                 # View contai
 
 ---
 
-## 💡 Author
+## ✨ Author
 
-**Your Name**  
+Developed by [lifan2029](https://github.com/your-username) — Fullstack developer.  
+If you like this project, feel free to ⭐ star it on GitHub!
+
 📧 lifan2029@gmail.com  
-🌐 [GitHub](https://github.com/lifan2029)
 
 ---
 
