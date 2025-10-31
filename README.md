@@ -127,4 +127,4 @@ If you like this project, feel free to ⭐ star it on GitHub!
 
 ---
 
-> 🧠 This project was created for learning purposes to demonstrate Laravel API development with Docker.
+> 🧠 This project was created for demonstrate Laravel API development with Docker.
